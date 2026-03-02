@@ -415,6 +415,88 @@
             font-size: 2.5rem;
             line-height: 1;
         }
+
+        /* ── Profile photo flip card ── */
+        .photo-flip-container {
+            perspective: 800px;
+            cursor: pointer;
+        }
+        .photo-flip-inner {
+            position: relative;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .photo-flip-container:hover .photo-flip-inner,
+        .photo-flip-container.flipped .photo-flip-inner {
+            transform: rotateY(180deg);
+        }
+        .photo-flip-front,
+        .photo-flip-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .photo-flip-back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #2a2260 0%, #1f1948 40%, #161230 100%);
+            box-shadow: 0 8px 32px rgba(123, 108, 246, 0.3), inset 0 1px 0 rgba(155, 143, 250, 0.15);
+        }
+        .photo-flip-back svg {
+            width: 40%;
+            height: 40%;
+            fill: #9B8FFA;
+            filter: drop-shadow(0 2px 12px rgba(123, 108, 246, 0.5));
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .photo-flip-container:hover .photo-flip-back svg,
+        .photo-flip-container.flipped .photo-flip-back svg {
+            transform: scale(1.08);
+        }
+        .photo-flip-hint {
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            color: #7B74A0;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .photo-flip-container:hover .photo-flip-hint {
+            opacity: 1;
+        }
+        /* Mobile: show hint always briefly via animation */
+        @media (max-width: 1023px) {
+            .photo-flip-hint {
+                animation: hint-pulse 3s ease-in-out 2s 2;
+            }
+            @keyframes hint-pulse {
+                0%, 100% { opacity: 0; }
+                30%, 70% { opacity: 1; }
+            }
+        }
+
+        /* ── LinkedIn button style ── */
+        .btn-linkedin {
+            background: #0A66C2;
+            color: #fff;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(10, 102, 194, 0.3), 0 2px 8px rgba(10, 102, 194, 0.15);
+        }
+        .btn-linkedin:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(10, 102, 194, 0.45), 0 4px 12px rgba(10, 102, 194, 0.25);
+        }
+        .btn-linkedin:active { transform: translateY(0) scale(0.98); }
+        .btn-linkedin:focus-visible { outline: 2px solid #0A66C2; outline-offset: 4px; }
     </style>
 </head>
 
@@ -527,15 +609,27 @@
                     </div>
                 </div>
 
-                <!-- Right: Profile photo -->
+                <!-- Right: Profile photo with LinkedIn flip -->
                 <div class="hero-animate hero-delay-2 flex-shrink-0 relative">
                     <div class="float-anim relative">
                         <!-- Large ambient glow behind photo -->
                         <div class="absolute -inset-8 rounded-full" style="background: radial-gradient(circle, rgba(123, 108, 246, 0.25) 0%, rgba(123, 108, 246, 0.08) 50%, transparent 70%);"></div>
-                        <div class="photo-ring relative">
-                            <div class="rounded-full overflow-hidden w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80" style="background: #1f1948;">
-                                <img src="brand_assets/profile_picture.png" alt="Nadav Reubens" class="w-full h-full object-cover" style="object-position: center 15%; filter: brightness(1.15) contrast(1.1) saturate(0.9);">
+                        <div class="photo-flip-container" id="photo-flip" onclick="handlePhotoFlip(event)" role="link" aria-label="Visit LinkedIn profile" tabindex="0" onkeydown="if(event.key==='Enter')handlePhotoFlip(event)">
+                            <div class="photo-ring relative">
+                                <div class="photo-flip-inner w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80">
+                                    <!-- Front: Profile photo -->
+                                    <div class="photo-flip-front rounded-full overflow-hidden w-full h-full" style="background: #1f1948;">
+                                        <img src="brand_assets/profile_picture.png" alt="Nadav Reubens" class="w-full h-full object-cover" style="object-position: center 15%; filter: brightness(1.15) contrast(1.1) saturate(0.9);">
+                                    </div>
+                                    <!-- Back: LinkedIn logo -->
+                                    <div class="photo-flip-back">
+                                        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
+                            <span class="photo-flip-hint" data-i18n="hero.linkedin.hint">Tap to visit LinkedIn</span>
                         </div>
                     </div>
                 </div>
@@ -902,7 +996,7 @@
                 <p class="text-txt-dim text-lg max-w-md mx-auto mb-10" data-i18n="contact.subtitle">Open to backend development opportunities and exciting projects.</p>
             </div>
 
-            <div class="reveal delay-2 flex flex-col sm:flex-row justify-center gap-4 mb-16">
+            <div class="reveal delay-2 flex flex-col sm:flex-row flex-wrap justify-center gap-4 mb-16">
                 <a href="mailto:Nadavreubens8@gmail.com" dir="ltr" class="btn-primary inline-flex items-center justify-center gap-2 bg-accent text-deep font-semibold px-8 py-4 rounded-xl">
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     Nadavreubens8@gmail.com
@@ -910,6 +1004,10 @@
                 <a href="tel:054-813-7433" dir="ltr" class="btn-ghost inline-flex items-center justify-center gap-2 border border-bdr text-txt-dim font-semibold px-8 py-4 rounded-xl">
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                     (054)-813-7433
+                </a>
+                <a href="https://www.linkedin.com/in/nadav-reubens-a5957a314" target="_blank" rel="noopener noreferrer" class="btn-linkedin inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-xl">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <span data-i18n="contact.linkedin">LinkedIn</span>
                 </a>
             </div>
 
@@ -988,6 +1086,32 @@
     <!-- SCRIPTS                                       -->
     <!-- ════════════════════════════════════════════ -->
     <script>
+        // ── Photo flip (LinkedIn) ──
+        let photoFlipState = 0; // 0=idle, 1=flipped
+        function handlePhotoFlip(e) {
+            var container = document.getElementById('photo-flip');
+            var isMobile = window.matchMedia('(hover: none)').matches;
+            if (isMobile) {
+                if (photoFlipState === 0) {
+                    // First tap: flip to show LinkedIn
+                    container.classList.add('flipped');
+                    photoFlipState = 1;
+                    e.preventDefault();
+                } else {
+                    // Second tap: open LinkedIn
+                    window.open('https://www.linkedin.com/in/nadav-reubens-a5957a314', '_blank', 'noopener');
+                    // Reset after short delay
+                    setTimeout(function() {
+                        container.classList.remove('flipped');
+                        photoFlipState = 0;
+                    }, 600);
+                }
+            } else {
+                // Desktop: hover already flips, click opens directly
+                window.open('https://www.linkedin.com/in/nadav-reubens-a5957a314', '_blank', 'noopener');
+            }
+        }
+
         // ── Translations ──
         const translations = {
             en: {
@@ -1002,6 +1126,8 @@
                 "hero.location": "Qiryat Ata, Israel",
                 "hero.download": "Download CV",
                 "hero.contact": "Get In Touch",
+                "hero.linkedin.hint": "Tap to visit LinkedIn",
+                "contact.linkedin": "LinkedIn",
 
                 // Skills
                 "skills.title": "Technical Skills",
@@ -1087,6 +1213,8 @@
                 "hero.location": "קרית אתא, ישראל",
                 "hero.download": "הורדת קורות חיים",
                 "hero.contact": "צור קשר",
+                "hero.linkedin.hint": "לחצו לביקור בלינקדאין",
+                "contact.linkedin": "לינקדאין",
 
                 // Skills
                 "skills.title": "כישורים טכניים",
