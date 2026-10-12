@@ -416,6 +416,80 @@
             line-height: 1;
         }
 
+        /* ── "Learning" badge on skill cards ── */
+        .skill-learn { position: relative; }
+        .skill-learn-badge {
+            position: absolute;
+            top: 8px; right: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            line-height: 1.5;
+            color: #A8B8A0;
+            background: rgba(140, 158, 132, 0.12);
+            border: 1px solid rgba(140, 158, 132, 0.28);
+            padding: 2px 6px;
+            border-radius: 999px;
+        }
+        [dir="rtl"] .skill-learn-badge { right: auto; left: 8px; }
+
+        /* ── Project card ── */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(10, 6, 26, 0.4);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #7B6CF6, #9B8FFA 45%, rgba(140, 158, 132, 0.55));
+            transform: scaleY(0.3);
+            transform-origin: top;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        [dir="rtl"] .project-card::before { left: auto; right: 0; }
+        [dir="rtl"] .project-card .font-mono,
+        [dir="rtl"] .skill-learn-badge { letter-spacing: normal; }
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(123, 108, 246, 0.45);
+            box-shadow: 0 16px 44px rgba(123, 108, 246, 0.16), 0 4px 14px rgba(10, 6, 26, 0.5);
+        }
+        .project-card:hover::before,
+        .project-card:focus-within::before { transform: scaleY(1); }
+        .project-card:focus-within { border-color: rgba(123, 108, 246, 0.5); }
+
+        /* ── Tech stack chip ── */
+        .tech-chip {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.04em;
+            color: #A9A3C4;
+            background: rgba(31, 25, 72, 0.6);
+            border: 1px solid rgba(51, 43, 110, 0.6);
+            padding: 4px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .project-card:hover .tech-chip,
+        .project-card:focus-within .tech-chip { color: #F0ECF8; border-color: rgba(123, 108, 246, 0.3); }
+
+        /* ── Reduced motion ── */
+        @media (prefers-reduced-motion: reduce) {
+            .project-card, .project-card::before, .tech-chip,
+            .skill-card, .photo-ring, .photo-float {
+                transition-duration: 0.01ms !important;
+                animation: none !important;
+            }
+            .project-card::before { transform: scaleY(1); }
+            .reveal { opacity: 1; transform: none; }
+        }
+
         /* ── Profile photo flip card ── */
         .photo-flip-container {
             perspective: 800px;
@@ -520,6 +594,7 @@
             <div class="hidden md:flex items-center gap-8">
                 <a href="#skills" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.skills">Skills</a>
                 <a href="#experience" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.experience">Experience</a>
+                <a href="#projects" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.projects">Projects</a>
                 <a href="#education" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.education">Education</a>
                 <a href="#contact" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.contact">Contact</a>
                 <button onclick="toggleLanguage()" class="lang-toggle font-mono text-xs text-txt-dim bg-elevated/60 border border-bdr/50 px-3 py-1.5 rounded-full hover:border-accent/40 hover:text-accent" aria-label="Toggle language">
@@ -543,6 +618,7 @@
             <div class="flex flex-col gap-4">
                 <a href="#skills" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.skills">Skills</a>
                 <a href="#experience" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.experience">Experience</a>
+                <a href="#projects" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.projects">Projects</a>
                 <a href="#education" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.education">Education</a>
                 <a href="#contact" class="nav-link font-mono text-sm text-txt-dim" data-i18n="nav.contact">Contact</a>
             </div>
@@ -577,7 +653,7 @@
                     </h1>
 
                     <p class="hero-animate hero-delay-3 text-txt-dim text-lg sm:text-xl max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed" data-i18n-html="hero.tagline">
-                        Building scalable backend systems with <span class="text-txt font-medium">.NET Core</span>, <span class="text-txt font-medium">REST APIs</span>, and <span class="text-txt font-medium">SQL Server</span>. Passionate about clean architecture and production-grade code.
+                        Backend developer and startup partner with <span class="text-txt font-medium">2+ years</span> building production <span class="text-txt font-medium">.NET Core</span> APIs, automations, and cloud integrations. I take features from the first spec all the way to production.
                     </p>
 
                     <!-- Contact pills -->
@@ -657,18 +733,18 @@
             <div class="text-center mb-16 reveal">
                 <span class="font-mono text-xs text-accent tracking-widest uppercase">&lt; 01 /&gt;</span>
                 <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mt-3 tracking-[-0.03em]" data-i18n="skills.title">Technical Skills</h2>
-                <p class="text-txt-dim mt-4 max-w-lg mx-auto" data-i18n="skills.subtitle">Core technologies and tools I use to build robust, scalable backend systems.</p>
+                <p class="text-txt-dim mt-4 max-w-lg mx-auto" data-i18n="skills.subtitle">Core technologies and tools I use to build robust backend systems, automations, and cloud integrations.</p>
             </div>
 
             <!-- ── Primary Stack (Featured) ── -->
             <div class="mb-12">
                 <h3 class="font-mono text-xs text-accent/70 tracking-widest uppercase mb-6 reveal" data-i18n="skills.backend">Backend &amp; Architecture</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                     <!-- C# -->
                     <div class="skill-card skill-featured rounded-2xl p-5 text-center reveal delay-1" tabindex="0">
                         <div class="skill-icon-lg mb-3 text-accent-glow"><i class="devicon-csharp-plain"></i></div>
-                        <p class="font-semibold text-sm text-txt">C#</p>
-                        <p class="font-mono text-[10px] text-txt-muted mt-1">.NET 6–8</p>
+                        <p class="font-semibold text-sm text-txt" dir="ltr">C#</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1" dir="ltr">.NET 6–8</p>
                     </div>
                     <!-- .NET Core -->
                     <div class="skill-card skill-featured rounded-2xl p-5 text-center reveal delay-2" tabindex="0">
@@ -696,13 +772,29 @@
                         <p class="font-semibold text-sm text-txt">EF Core</p>
                         <p class="font-mono text-[10px] text-txt-muted mt-1">ORM / Data</p>
                     </div>
+                    <!-- Authentication -->
+                    <div class="skill-card skill-featured rounded-2xl p-5 text-center reveal delay-1" tabindex="0">
+                        <div class="skill-icon-lg mb-3 text-accent-glow">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/><circle cx="12" cy="16" r="1.2"/></svg>
+                        </div>
+                        <p class="font-semibold text-sm text-txt">Authentication</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">JWT / Claims</p>
+                    </div>
+                    <!-- Background Workers -->
+                    <div class="skill-card skill-featured rounded-2xl p-5 text-center reveal delay-2" tabindex="0">
+                        <div class="skill-icon-lg mb-3 text-accent-glow">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto"><path d="M12 3v3M12 18v3M4.2 7.5l2.6 1.5M17.2 15l2.6 1.5M4.2 16.5l2.6-1.5M17.2 9l2.6-1.5"/><circle cx="12" cy="12" r="3.5"/></svg>
+                        </div>
+                        <p class="font-semibold text-sm text-txt">Workers</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">Jobs / Automation</p>
+                    </div>
                 </div>
             </div>
 
             <!-- ── Frontend (Working Knowledge) ── -->
             <div class="mb-12">
                 <h3 class="font-mono text-xs text-sage tracking-widest uppercase mb-6 reveal" data-i18n="skills.frontend">Frontend — Working Knowledge</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                     <div class="skill-card rounded-2xl bg-elevated/40 p-5 text-center reveal delay-1" tabindex="0">
                         <div class="skill-icon mb-3 text-sage-light"><i class="devicon-angularjs-plain"></i></div>
                         <p class="font-semibold text-sm text-txt">Angular</p>
@@ -719,13 +811,82 @@
                         <div class="skill-icon mb-3 text-sage-light"><i class="devicon-css3-plain"></i></div>
                         <p class="font-semibold text-sm text-txt">CSS3</p>
                     </div>
+                    <div class="skill-card rounded-2xl bg-elevated/40 p-5 text-center reveal delay-5" tabindex="0">
+                        <div class="skill-icon mb-3 text-sage-light"><i class="devicon-react-original"></i></div>
+                        <p class="font-semibold text-sm text-txt">React</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Cloud & Integrations ── -->
+            <div class="mb-12">
+                <h3 class="font-mono text-xs text-accent-glow/80 tracking-widest uppercase mb-6 reveal" data-i18n="skills.cloud">Cloud &amp; Integrations</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- AWS S3 -->
+                    <div class="skill-card rounded-2xl bg-elevated/40 p-5 text-center reveal delay-1" tabindex="0">
+                        <div class="skill-icon mb-3 text-accent-glow"><i class="devicon-amazonwebservices-plain-wordmark"></i></div>
+                        <p class="font-semibold text-sm text-txt" dir="ltr">AWS S3</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">File Storage</p>
+                    </div>
+                    <!-- Google Cloud Vision -->
+                    <div class="skill-card rounded-2xl bg-elevated/40 p-5 text-center reveal delay-2" tabindex="0">
+                        <div class="skill-icon mb-3 text-accent-glow"><i class="devicon-googlecloud-plain"></i></div>
+                        <p class="font-semibold text-sm text-txt" dir="ltr">Cloud Vision</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">OCR</p>
+                    </div>
+                    <!-- Gmail API -->
+                    <div class="skill-card rounded-2xl bg-elevated/40 p-5 text-center reveal delay-3" tabindex="0">
+                        <div class="skill-icon mb-3 text-accent-glow">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2.5,5.5 12,13 21.5,5.5"/></svg>
+                        </div>
+                        <p class="font-semibold text-sm text-txt" dir="ltr">Gmail API</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">Email Automation</p>
+                    </div>
+                    <!-- Microsoft Graph -->
+                    <div class="skill-card rounded-2xl bg-elevated/40 p-5 text-center reveal delay-4" tabindex="0">
+                        <div class="skill-icon mb-3 text-accent-glow">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto"><circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="12" cy="17" r="2.5"/><path d="M8.3 8.4l2.4 6.2M15.7 8.4l-2.4 6.2M8.5 7h7"/></svg>
+                        </div>
+                        <p class="font-semibold text-sm text-txt" dir="ltr">MS Graph</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">Microsoft 365</p>
+                    </div>
+                    <!-- Supabase -->
+                    <div class="skill-card rounded-2xl bg-elevated/40 p-5 text-center reveal delay-1" tabindex="0">
+                        <div class="skill-icon mb-3 text-sage-light"><i class="devicon-supabase-plain"></i></div>
+                        <p class="font-semibold text-sm text-txt">Supabase</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">PostgreSQL</p>
+                    </div>
+                    <!-- Vercel -->
+                    <div class="skill-card rounded-2xl bg-elevated/40 p-5 text-center reveal delay-2" tabindex="0">
+                        <div class="skill-icon mb-3 text-sage-light"><i class="devicon-vercel-original"></i></div>
+                        <p class="font-semibold text-sm text-txt">Vercel</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">Deployment</p>
+                    </div>
+                    <!-- AWS SQS — learning -->
+                    <div class="skill-card skill-learn rounded-2xl bg-surface/50 p-5 text-center reveal delay-3" tabindex="0">
+                        <span class="skill-learn-badge" data-i18n="skills.learning">Learning</span>
+                        <div class="skill-icon mb-3 text-txt-dim">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto"><rect x="2" y="9" width="5" height="6" rx="1"/><rect x="9.5" y="9" width="5" height="6" rx="1"/><rect x="17" y="9" width="5" height="6" rx="1"/></svg>
+                        </div>
+                        <p class="font-semibold text-sm text-txt-dim" dir="ltr">AWS SQS</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">Queues</p>
+                    </div>
+                    <!-- Step Functions — learning -->
+                    <div class="skill-card skill-learn rounded-2xl bg-surface/50 p-5 text-center reveal delay-4" tabindex="0">
+                        <span class="skill-learn-badge" data-i18n="skills.learning">Learning</span>
+                        <div class="skill-icon mb-3 text-txt-dim">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto"><rect x="3" y="3" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><rect x="9" y="9.5" width="6" height="5" rx="1"/><path d="M9 5.5h0.5a2 2 0 012 2v2M15 18.5h-0.5a2 2 0 01-2-2v-2"/></svg>
+                        </div>
+                        <p class="font-semibold text-sm text-txt-dim" dir="ltr">Step Functions</p>
+                        <p class="font-mono text-[10px] text-txt-muted mt-1">Orchestration</p>
+                    </div>
                 </div>
             </div>
 
             <!-- ── DevOps & Tools ── -->
             <div>
                 <h3 class="font-mono text-xs text-txt-muted tracking-widest uppercase mb-6 reveal" data-i18n="skills.devops">DevOps &amp; Tools</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                     <div class="skill-card rounded-2xl bg-surface/60 p-4 text-center reveal delay-1" tabindex="0">
                         <div class="skill-icon mb-2 text-txt-dim"><i class="devicon-git-plain"></i></div>
                         <p class="font-medium text-xs text-txt">Git</p>
@@ -749,6 +910,12 @@
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                         </div>
                         <p class="font-medium text-xs text-txt">JSON / XML</p>
+                    </div>
+                    <div class="skill-card rounded-2xl bg-surface/60 p-4 text-center reveal delay-5" tabindex="0">
+                        <div class="skill-icon mb-2 text-txt-dim">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M6 8.5v5a4 4 0 004 4h5.5"/></svg>
+                        </div>
+                        <p class="font-medium text-xs text-txt">Make</p>
                     </div>
                 </div>
             </div>
@@ -784,15 +951,17 @@
                             <span class="font-mono text-[10px] text-sage bg-sage/10 border border-sage/20 px-2 py-0.5 rounded-full" data-i18n="exp1.badge">CURRENT</span>
                         </div>
                         <h3 class="font-display font-bold text-xl sm:text-2xl mb-1" data-i18n="exp1.title">Backend Developer &amp; Partner</h3>
-                        <p class="text-accent font-medium text-sm mb-5" data-i18n="exp1.company">Startup</p>
+                        <p class="text-accent font-medium text-sm mb-5" data-i18n="exp1.company">InsurTech Startup &middot; Israel</p>
                         <ul class="space-y-2.5 text-txt-dim text-sm leading-relaxed">
-                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b1"> Designed and developed REST APIs using .NET Core</span></li>
-                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b2"> Built authentication and authorization logic</span></li>
-                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b3"> Developed backend services handling business workflows</span></li>
-                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b4"> Worked with SQL Server — queries, relations, optimization</span></li>
-                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b5"> Integrated external APIs and deployed services using IIS</span></li>
-                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b6"> Collaborated with frontend team (Angular) and took part in system design decisions</span></li>
-                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b7"> Managed source control using Git / GitHub in an agile environment</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b1"> Own product features end-to-end, from writing the spec and designing the API to running them in production</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b2"> Designed and developed REST APIs using .NET Core</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b3"> Built the authentication module: JWT issuing, claims, token lifetime, failed-login lockout, and password reset flows</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b4"> Developed background workers and automations driving business workflows</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b5"> Worked with SQL Server on queries, relations, and optimization</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b6"> Integrated external APIs: insurance carrier quote APIs, Gmail API and Microsoft Graph for email automation, and Google Cloud Vision OCR for agent license verification</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b7"> Deployed and maintained services on IIS, with a migration to AWS EC2 planned</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b8"> Collaborated with the frontend team (Angular) and took part in system design decisions</span></li>
+                            <li class="flex gap-3"><span class="text-accent mt-1.5 shrink-0">&#9656;</span><span data-i18n="exp1.b9"> Managed source control using Git / GitHub in an agile environment</span></li>
                         </ul>
                     </div>
                 </div>
@@ -883,6 +1052,83 @@
 
 
     <!-- ════════════════════════════════════════════ -->
+    <!-- SELECTED PROJECTS                             -->
+    <!-- ════════════════════════════════════════════ -->
+    <section id="projects" class="relative py-24 lg:py-32">
+        <div class="max-w-4xl mx-auto px-6">
+
+            <!-- Section heading -->
+            <div class="text-center mb-16 reveal">
+                <span class="font-mono text-xs text-accent tracking-widest uppercase">&lt; 03 /&gt;</span>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mt-3 tracking-[-0.03em]" data-i18n="proj.title">Selected Projects</h2>
+                <p class="text-txt-dim mt-4 max-w-xl mx-auto" data-i18n="proj.subtitle">Products I helped define, built, and shipped.</p>
+            </div>
+
+            <div class="space-y-6">
+
+                <!-- ── Project 1: Insurance Quote Aggregator ── -->
+                <div class="project-card reveal delay-1 bg-elevated/50 border border-bdr/40 rounded-2xl p-6 sm:p-8">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span class="font-mono text-xs text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full" dir="ltr">01</span>
+                        <span class="font-mono text-[10px] text-sage bg-sage/10 border border-sage/20 px-2 py-0.5 rounded-full tracking-wider uppercase" data-i18n="proj1.stat">12 Carriers Integrated</span>
+                    </div>
+                    <h3 class="font-display font-bold text-xl sm:text-2xl mb-1" data-i18n="proj1.title">Insurance Quote Aggregator</h3>
+                    <p class="text-accent font-medium text-sm mb-4" data-i18n="proj1.role">Feature Owner &amp; Backend Developer</p>
+                    <p class="text-txt-dim text-sm leading-relaxed mb-5" data-i18n="proj1.desc">Led the car and home insurance quote aggregator, from writing the spec to shipping it. Consumed the quote APIs of 12 insurance carriers and normalized their responses into unified endpoints the app uses to compare prices side by side.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-chip" dir="ltr">.NET Core</span>
+                        <span class="tech-chip" dir="ltr">REST APIs</span>
+                        <span class="tech-chip" dir="ltr">SQL Server</span>
+                        <span class="tech-chip" dir="ltr">API Integration</span>
+                    </div>
+                </div>
+
+                <!-- ── Project 2: Commission Automation ── -->
+                <div class="project-card reveal delay-2 bg-elevated/50 border border-bdr/40 rounded-2xl p-6 sm:p-8">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span class="font-mono text-xs text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full" dir="ltr">02</span>
+                        <span class="font-mono text-[10px] text-sage bg-sage/10 border border-sage/20 px-2 py-0.5 rounded-full tracking-wider uppercase" data-i18n="proj2.stat">20+ Carriers</span>
+                    </div>
+                    <h3 class="font-display font-bold text-xl sm:text-2xl mb-1" data-i18n="proj2.title">Commission Automation Platform</h3>
+                    <p class="text-accent font-medium text-sm mb-4" data-i18n="proj2.role">Backend Developer &middot; Current Focus</p>
+                    <p class="text-txt-dim text-sm leading-relaxed mb-5" data-i18n="proj2.desc">Automated commission calculation and monitoring for insurance agencies across 20+ carriers. Built a background worker that ingests commission reports forwarded by agents over email, extracts and virus-scans the attachments, and uploads them to S3, feeding the dashboard agencies use to monitor and filter their commissions.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-chip" dir="ltr">.NET Core</span>
+                        <span class="tech-chip" dir="ltr">SQL Server</span>
+                        <span class="tech-chip" dir="ltr">Background Worker</span>
+                        <span class="tech-chip" dir="ltr">AWS S3</span>
+                        <span class="tech-chip" dir="ltr">Gmail API</span>
+                        <span class="tech-chip" dir="ltr">Microsoft Graph</span>
+                    </div>
+                </div>
+
+                <!-- ── Project 3: Lead Management System ── -->
+                <div class="project-card reveal delay-3 bg-elevated/50 border border-bdr/40 rounded-2xl p-6 sm:p-8">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span class="font-mono text-xs text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full" dir="ltr">03</span>
+                        <span class="font-mono text-[10px] text-sage bg-sage/10 border border-sage/20 px-2 py-0.5 rounded-full tracking-wider uppercase" data-i18n="proj3.stat">Standalone Product</span>
+                    </div>
+                    <h3 class="font-display font-bold text-xl sm:text-2xl mb-1" data-i18n="proj3.title">Lead Management System</h3>
+                    <p class="text-accent font-medium text-sm mb-4" data-i18n="proj3.role">Backend &amp; Integrations</p>
+                    <p class="text-txt-dim text-sm leading-relaxed mb-5" data-i18n="proj3.desc">A standalone lead-management product. Integrated an AI classifier that reads inbound WhatsApp messages and decides whether each one is a genuine lead, plus a Make automation that pulls leads from Facebook lead forms into the system.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-chip" dir="ltr">React</span>
+                        <span class="tech-chip" dir="ltr">Supabase</span>
+                        <span class="tech-chip" dir="ltr">PostgreSQL</span>
+                        <span class="tech-chip" dir="ltr">Vercel</span>
+                        <span class="tech-chip" dir="ltr">Make</span>
+                        <span class="tech-chip" dir="ltr">AI Classification</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+
+    <!-- ════════════════════════════════════════════ -->
     <!-- EDUCATION                                     -->
     <!-- ════════════════════════════════════════════ -->
     <section id="education" class="relative py-24 lg:py-32">
@@ -890,7 +1136,7 @@
 
             <!-- Section heading -->
             <div class="text-center mb-16 reveal">
-                <span class="font-mono text-xs text-accent tracking-widest uppercase">&lt; 03 /&gt;</span>
+                <span class="font-mono text-xs text-accent tracking-widest uppercase">&lt; 04 /&gt;</span>
                 <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mt-3 tracking-[-0.03em]" data-i18n="edu.title">Education</h2>
             </div>
 
@@ -899,7 +1145,8 @@
                 <!-- B.Sc. -->
                 <div class="reveal bg-elevated/50 border border-bdr/40 rounded-2xl p-6 sm:p-8">
                     <div class="flex flex-wrap items-center gap-3 mb-4">
-                        <span class="font-mono text-xs text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full" dir="ltr">10/2021 — 01/2026</span>
+                        <span class="font-mono text-xs text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full" dir="ltr">10/2021 — 05/2025</span>
+                        <span class="font-mono text-[10px] text-sage bg-sage/10 border border-sage/20 px-2 py-0.5 rounded-full" data-i18n="edu1.badge">GRADUATED</span>
                     </div>
                     <h3 class="font-display font-bold text-xl sm:text-2xl mb-1" data-i18n="edu1.title">B.Sc. in Software Engineering</h3>
                     <p class="text-accent font-medium text-sm mb-5" data-i18n="edu1.school">ORT Braude College of Engineering, Karmiel</p>
@@ -991,7 +1238,7 @@
     <footer id="contact" class="relative py-24 lg:py-32">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <div class="reveal">
-                <span class="font-mono text-xs text-accent tracking-widest uppercase">&lt; 04 /&gt;</span>
+                <span class="font-mono text-xs text-accent tracking-widest uppercase">&lt; 05 /&gt;</span>
                 <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mt-3 mb-6 tracking-[-0.03em]" data-i18n="contact.title">Let's Connect</h2>
                 <p class="text-txt-dim text-lg max-w-md mx-auto mb-10" data-i18n="contact.subtitle">Open to backend development opportunities and exciting projects.</p>
             </div>
@@ -1118,6 +1365,7 @@
                 // Nav
                 "nav.skills": "Skills",
                 "nav.experience": "Experience",
+                "nav.projects": "Projects",
                 "nav.education": "Education",
                 "nav.contact": "Contact",
 
@@ -1131,24 +1379,28 @@
 
                 // Skills
                 "skills.title": "Technical Skills",
-                "skills.subtitle": "Core technologies and tools I use to build robust, scalable backend systems.",
+                "skills.subtitle": "Core technologies and tools I use to build robust backend systems, automations, and cloud integrations.",
                 "skills.backend": "Backend & Architecture",
                 "skills.frontend": "Frontend — Working Knowledge",
+                "skills.cloud": "Cloud & Integrations",
                 "skills.devops": "DevOps & Tools",
+                "skills.learning": "Learning",
 
                 // Experience
                 "exp.title": "Experience",
                 "exp1.date": "06/2024 — Present",
                 "exp1.badge": "CURRENT",
                 "exp1.title": "Backend Developer & Partner",
-                "exp1.company": "Startup",
-                "exp1.b1": "Designed and developed REST APIs using .NET Core",
-                "exp1.b2": "Built authentication and authorization logic",
-                "exp1.b3": "Developed backend services handling business workflows",
-                "exp1.b4": "Worked with SQL Server — queries, relations, optimization",
-                "exp1.b5": "Integrated external APIs and deployed services using IIS",
-                "exp1.b6": "Collaborated with frontend team (Angular) and took part in system design decisions",
-                "exp1.b7": "Managed source control using Git / GitHub in an agile environment",
+                "exp1.company": "InsurTech Startup \u00b7 Israel",
+                "exp1.b1": "Own product features end-to-end, from writing the spec and designing the API to running them in production",
+                "exp1.b2": "Designed and developed REST APIs using .NET Core",
+                "exp1.b3": "Built the authentication module: JWT issuing, claims, token lifetime, failed-login lockout, and password reset flows",
+                "exp1.b4": "Developed background workers and automations driving business workflows",
+                "exp1.b5": "Worked with SQL Server on queries, relations, and optimization",
+                "exp1.b6": "Integrated external APIs: insurance carrier quote APIs, Gmail API and Microsoft Graph for email automation, and Google Cloud Vision OCR for agent license verification",
+                "exp1.b7": "Deployed and maintained services on IIS, with a migration to AWS EC2 planned",
+                "exp1.b8": "Collaborated with the frontend team (Angular) and took part in system design decisions",
+                "exp1.b9": "Managed source control using Git / GitHub in an agile environment",
                 "exp2.title": "Shift Manager",
                 "exp2.b1": "Managed on-site teams, security procedures, and coordination",
                 "exp2.b2": "Handled operational responsibility under pressure",
@@ -1167,9 +1419,26 @@
                 "exp6.company": "Rogozin High School \u00b7 Qiryat Ata",
                 "exp6.b1": "Helped children with learning difficulties in one-to-one support",
 
+                // Projects
+                "proj.title": "Selected Projects",
+                "proj.subtitle": "Products I helped define, built, and shipped.",
+                "proj1.title": "Insurance Quote Aggregator",
+                "proj1.role": "Feature Owner & Backend Developer",
+                "proj1.stat": "12 Carriers Integrated",
+                "proj1.desc": "Led the car and home insurance quote aggregator, from writing the spec to shipping it. Consumed the quote APIs of 12 insurance carriers and normalized their responses into unified endpoints the app uses to compare prices side by side.",
+                "proj2.title": "Commission Automation Platform",
+                "proj2.role": "Backend Developer \u00b7 Current Focus",
+                "proj2.stat": "20+ Carriers",
+                "proj2.desc": "Automated commission calculation and monitoring for insurance agencies across 20+ carriers. Built a background worker that ingests commission reports forwarded by agents over email, extracts and virus-scans the attachments, and uploads them to S3, feeding the dashboard agencies use to monitor and filter their commissions.",
+                "proj3.title": "Lead Management System",
+                "proj3.role": "Backend & Integrations",
+                "proj3.stat": "Standalone Product",
+                "proj3.desc": "A standalone lead-management product. Integrated an AI classifier that reads inbound WhatsApp messages and decides whether each one is a genuine lead, plus a Make automation that pulls leads from Facebook lead forms into the system.",
+
                 // Education
                 "edu.title": "Education",
                 "edu1.title": "B.Sc. in Software Engineering",
+                "edu1.badge": "GRADUATED",
                 "edu1.school": "ORT Braude College of Engineering, Karmiel",
                 "edu2.title": "Android Development Course",
                 "edu2.school": "John Bryce, Haifa",
@@ -1205,6 +1474,7 @@
                 // Nav
                 "nav.skills": "כישורים",
                 "nav.experience": "ניסיון",
+                "nav.projects": "פרויקטים",
                 "nav.education": "השכלה",
                 "nav.contact": "יצירת קשר",
 
@@ -1218,24 +1488,28 @@
 
                 // Skills
                 "skills.title": "כישורים טכניים",
-                "skills.subtitle": "הטכנולוגיות והכלים המרכזיים שאני עובד איתם לבניית מערכות Backend יציבות וחזקות.\u200E",
+                "skills.subtitle": "הטכנולוגיות והכלים המרכזיים שאני עובד איתם לבניית מערכות Backend יציבות, אוטומציות ואינטגרציות ענן.\u200E",
                 "skills.backend": "Backend וארכיטקטורה",
                 "skills.frontend": "Frontend — ידע עבודה",
+                "skills.cloud": "ענן ואינטגרציות",
                 "skills.devops": "DevOps וכלים",
+                "skills.learning": "בלמידה",
 
                 // Experience
                 "exp.title": "ניסיון תעסוקתי",
                 "exp1.date": "06/2024 — היום",
                 "exp1.badge": "נוכחי",
                 "exp1.title": "מפתח Backend ושותף",
-                "exp1.company": "סטארטאפ",
-                "exp1.b1": "תכנון ופיתוח REST APIs באמצעות \u200E.NET Core",
-                "exp1.b2": "בניית מנגנוני אימות והרשאות",
-                "exp1.b3": "פיתוח שירותי Backend לניהול תהליכים עסקיים",
-                "exp1.b4": "עבודה עם SQL Server — שאילתות, יחסים בין טבלאות ואופטימיזציה",
-                "exp1.b5": "חיבור APIs חיצוניים ופריסת שירותים באמצעות IIS",
-                "exp1.b6": "עבודה משותפת עם צוות Frontend \u200E(Angular) והשתתפות בתכנון ארכיטקטורת המערכת",
-                "exp1.b7": "ניהול קוד מקור באמצעות Git / GitHub בסביבת עבודה Agile",
+                "exp1.company": "סטארטאפ אינשורטק \u00b7 ישראל",
+                "exp1.b1": "אחריות על פיצ׳רים מקצה לקצה, מכתיבת האפיון ותכנון ה-API ועד להרצה בפרודקשן",
+                "exp1.b2": "תכנון ופיתוח REST APIs באמצעות \u200E.NET Core",
+                "exp1.b3": "בניית מודול האימות: הנפקת JWT, \u200Eclaims, אורך חיי טוקן, חסימה לאחר ניסיונות התחברות כושלים ותהליך איפוס סיסמה",
+                "exp1.b4": "פיתוח Workers ואוטומציות המריצים תהליכים עסקיים",
+                "exp1.b5": "עבודה עם SQL Server על שאילתות, יחסים בין טבלאות ואופטימיזציה",
+                "exp1.b6": "חיבור APIs חיצוניים: ממשקי הצעות מחיר של חברות ביטוח, \u200EGmail API ו-Microsoft Graph לאוטומציית מייל, ו-Google Cloud Vision OCR לאימות רישיונות סוכנים",
+                "exp1.b7": "פריסה ותחזוקה של שירותים ב-IIS, עם מעבר מתוכנן ל-AWS EC2",
+                "exp1.b8": "עבודה משותפת עם צוות Frontend \u200E(Angular) והשתתפות בתכנון ארכיטקטורת המערכת",
+                "exp1.b9": "ניהול קוד מקור באמצעות Git / GitHub בסביבת עבודה Agile",
                 "exp2.title": "מנהל משמרת",
                 "exp2.b1": "ניהול צוותים בשטח, נהלי ביטחון ותיאום",
                 "exp2.b2": "נשיאה באחריות תפעולית תחת לחץ",
@@ -1254,9 +1528,26 @@
                 "exp6.company": "תיכון רוגוזין \u00b7 קרית אתא",
                 "exp6.b1": "סיוע לתלמידים עם קשיי למידה בליווי אישי",
 
+                // Projects
+                "proj.title": "פרויקטים נבחרים",
+                "proj.subtitle": "מוצרים שהגדרתי, פיתחתי והעליתי לאוויר.",
+                "proj1.title": "אגרגטור הצעות מחיר לביטוח",
+                "proj1.role": "אחראי פיצ׳ר ומפתח Backend",
+                "proj1.stat": "אינטגרציה עם 12 חברות ביטוח",
+                "proj1.desc": "הובלתי את אגרגטור הצעות המחיר לביטוח רכב ודירה, מכתיבת האפיון ועד לעלייה לאוויר. צרכתי את ממשקי ה-API של 12 חברות ביטוח ונרמלתי את התשובות שלהן לאנדפוינטים אחידים שהאפליקציה צורכת כדי להשוות מחירים זה מול זה.",
+                "proj2.title": "מערכת אוטומציה לעמלות",
+                "proj2.role": "מפתח Backend \u00b7 הפרויקט הנוכחי",
+                "proj2.stat": "מעל 20 חברות ביטוח",
+                "proj2.desc": "אוטומציה של חישוב וניטור עמלות עבור בתי סוכן בביטוח, מול יותר מ-20 חברות ביטוח. בניתי Worker שמקבל דוחות עמלות שסוכנים מעבירים במייל, מחלץ את הקבצים המצורפים, סורק אותם לווירוסים ומעלה אותם ל-S3, ומזין את הדשבורד שבו בתי הסוכן עוקבים אחרי העמלות ומסננים אותן.",
+                "proj3.title": "מערכת ניהול לידים",
+                "proj3.role": "Backend ואינטגרציות",
+                "proj3.stat": "מוצר עצמאי",
+                "proj3.desc": "מוצר עצמאי לניהול לידים. שילבתי מסווג AI שקורא הודעות WhatsApp נכנסות ומחליט אם כל הודעה היא ליד אמיתי, ובנוסף אוטומציה ב-Make שמביאה לידים מטפסי לידים בפייסבוק אל תוך המערכת.",
+
                 // Education
                 "edu.title": "השכלה",
                 "edu1.title": "תואר ראשון (.B.Sc) בהנדסת תוכנה",
+                "edu1.badge": "בוגר",
                 "edu1.school": "מכללת אורט בראודה להנדסה, כרמיאל",
                 "edu2.title": "קורס פיתוח Android",
                 "edu2.school": "ג'ון ברייס, חיפה",
@@ -1294,13 +1585,13 @@
         const htmlTranslations = {
             en: {
                 "hero.name": 'Nadav<br><span class="text-accent">Reubens</span>',
-                "hero.tagline": 'Building scalable backend systems with <span class="text-txt font-medium">.NET Core</span>, <span class="text-txt font-medium">REST APIs</span>, and <span class="text-txt font-medium">SQL Server</span>. Passionate about clean architecture and production-grade code.',
+                "hero.tagline": 'Backend developer and startup partner with <span class="text-txt font-medium">2+ years</span> building production <span class="text-txt font-medium">.NET Core</span> APIs, automations, and cloud integrations. I take features from the first spec all the way to production.',
                 "exp2.company": 'Electra (02/2022–06/2024) &middot; T&amp;M, Haifa (08/2021–02/2022)',
                 "contact.copyright": '&copy; 2026 Nadav Reubens &middot; Qiryat Ata, Israel',
             },
             he: {
                 "hero.name": 'נדב<br><span class="text-accent">ראובנס</span>',
-                "hero.tagline": 'בונה מערכות Backend חזקות ויציבות עם <span class="text-txt font-medium" dir="ltr">.NET Core</span>, <span class="text-txt font-medium" dir="ltr">REST APIs</span> ו-<span class="text-txt font-medium" dir="ltr">SQL Server</span>. מאמין בארכיטקטורה נקייה וקוד ברמת Production.',
+                "hero.tagline": 'מפתח Backend ושותף בסטארטאפ עם <span class="text-txt font-medium">2+ שנות</span> ניסיון בבניית ממשקי <span class="text-txt font-medium" dir="ltr">.NET Core</span> בפרודקשן, אוטומציות ואינטגרציות ענן. לוקח פיצ׳רים מהאפיון הראשוני ועד לפרודקשן.',
                 "exp2.company": 'אלקטרה \u200E(02/2022–06/2024) &middot; T&M, חיפה \u200E(08/2021–02/2022)',
                 "contact.copyright": '&copy; 2026 נדב ראובנס &middot; קרית אתא, ישראל',
             }
