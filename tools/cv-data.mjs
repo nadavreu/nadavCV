@@ -26,14 +26,15 @@ export const en = {
   dir: 'ltr',
   title_summary: 'PROFESSIONAL SUMMARY',
   summary:
-    'Backend developer and startup partner with 2+ years of hands-on experience building production .NET Core APIs, automations, and cloud integrations. I own product features end-to-end, from writing the spec and designing the API to running them in production. Recent work includes an insurance quote aggregator integrating 12 carriers, and a commission calculation and monitoring platform covering 20+ carriers. Experienced in authentication systems, SQL Server, background workers, and integrating Google Cloud, Microsoft 365, and AWS services. Fast learner with strong ownership, comfortable working in a startup environment.',
+    'Backend developer and startup partner with 2+ years of hands-on experience building production .NET Core APIs, automations, and cloud integrations. I own product features end-to-end, from defining scope and designing the service and data architecture to shipping and testing them in production. Recent work includes an insurance quote aggregator integrating 12 carriers, and a commission calculation and monitoring platform covering 20+ carriers, backed by a three-tier MSTest suite covering business rules, HTTP contracts, and real SQL behaviour. Experienced in authentication systems, SQL Server, background workers, and integrating Google Cloud, Microsoft 365, and AWS services. Fast learner with strong ownership, comfortable working in a startup environment.',
 
   title_skills: 'TECHNICAL SKILLS',
   skills: [
-    { group: 'Backend & Architecture', items: 'C# / .NET Core (.NET 6–8) · RESTful API design · Entity Framework Core · SQL Server (SSMS) · Authentication (JWT, claims, token lifetime, lockout, password reset) · Background workers & automations' },
-    { group: 'Cloud & Integrations', items: 'AWS S3 · Google Cloud Vision (OCR) · Gmail API · Microsoft Graph · Supabase / PostgreSQL · Vercel · Currently learning: AWS SQS, AWS Step Functions' },
+    { group: 'Backend & Architecture', items: 'C# / .NET Core (.NET 6–8) · Service & data architecture · RESTful API design · Entity Framework Core · SQL Server (SSMS) · Authentication (JWT, claims, token lifetime, lockout, password reset) · Background workers & automations · Unit, HTTP and SQL integration testing (MSTest)' },
+    { group: 'AI Tooling & Integration', items: 'Claude Code · Codex · MCP server integration · Authoring custom agent skills · OpenRouter model routing' },
     { group: 'Frontend (Working Knowledge)', items: 'Angular · React · TypeScript · HTML / CSS' },
-    { group: 'DevOps & Tools', items: 'IIS deployment · Git / GitHub (team workflow) · Postman · Make · JSON / XML' },
+    { group: 'Cloud & Integrations', items: 'AWS S3 · Google Cloud Vision (OCR) · Gmail API · Microsoft Graph · Supabase / PostgreSQL · Vercel · Currently learning: AWS SQS, AWS Step Functions' },
+    { group: 'DevOps & Tools', items: 'Git / GitHub (branching, pull request review, release flow) · GitHub Actions · Jenkins · IIS deployment · Postman · Make · JSON / XML' },
   ],
 
   title_soft: 'SOFT SKILLS',
@@ -44,17 +45,21 @@ export const en = {
     {
       date: '06/2024 – Present',
       role: 'Backend Developer & Partner',
-      org: 'InsurTech Startup, Israel',
+      org: 'Stagent, Israel',
       bullets: [
         'Own product features end-to-end, from writing the spec and designing the API to running them in production',
+        'Design the service and data architecture behind the platform, from API boundaries and data models to integration patterns across 20+ insurance carriers',
         'Designed and developed REST APIs using .NET Core',
         'Built the authentication module: JWT issuing, claims, token lifetime, failed-login lockout, and password reset flows',
         'Developed background workers and automations driving business workflows',
         'Worked with SQL Server on queries, relations, and optimization',
         'Integrated external APIs: insurance carrier quote APIs, Gmail API and Microsoft Graph for email automation, and Google Cloud Vision OCR for agent license verification',
+        'Built a three-tier test suite in MSTest: unit tests for business rules, isolated HTTP tests covering routing, auth, status codes and JSON shape without a live server, and integration tests against a throwaway SQL database. EF in-memory is deliberately not accepted as proof of SQL behaviour',
+        'Build CI workflows in GitHub Actions to run the test suite on push',
         'Deployed and maintained services on IIS, with a migration to AWS EC2 planned',
+        'Manage branching, pull request review, and release flow across the team’s repositories using Git and GitHub',
         'Collaborated with the frontend team (Angular) and took part in system design decisions',
-        'Managed source control using Git / GitHub in an agile environment',
+        'Use Claude Code and Codex daily to draft business rules, implement and review code, and generate test coverage, and author custom agent skills for repeated workflows. Wired MCP servers into the development environment',
       ],
     },
     {
@@ -127,7 +132,7 @@ export const en = {
         'Integrated an AI classifier that reads inbound WhatsApp messages and determines whether each one is a genuine lead',
         'Automated Facebook lead-form ingestion via Make',
       ],
-      stack: 'React, Supabase / PostgreSQL, Vercel, Make',
+      stack: 'React, Supabase / PostgreSQL, Vercel, Make, OpenRouter',
     },
   ],
 
@@ -146,14 +151,15 @@ const heRaw = {
   dir: 'rtl',
   title_summary: 'תקציר מקצועי',
   summary:
-    'מפתח Backend ושותף בסטארטאפ, עם מעל שנתיים ניסיון מעשי בבניית ממשקי .NET Core בסביבת פרודקשן, אוטומציות ואינטגרציות ענן. אחראי על פיצ׳רים מקצה לקצה, מכתיבת האפיון ותכנון ה-API ועד להרצה בפרודקשן. בין הפרויקטים האחרונים: אגרגטור הצעות מחיר לביטוח המשולב עם 12 חברות ביטוח, ומערכת לחישוב וניטור עמלות המכסה מעל 20 חברות ביטוח. בעל ניסיון במערכות אימות והרשאות, SQL Server, פיתוח Workers, ואינטגרציה עם שירותי Google Cloud, Microsoft 365 ו-AWS. לומד מהר, לוקח אחריות ומרגיש בבית בסביבת סטארטאפ.',
+    'מפתח Backend ושותף בסטארטאפ, עם מעל שנתיים ניסיון מעשי בבניית ממשקי .NET Core בסביבת פרודקשן, אוטומציות ואינטגרציות ענן. אחראי על פיצ׳רים מקצה לקצה, מהגדרת הדרישות ותכנון ארכיטקטורת השירותים והנתונים ועד להרצה ולבדיקה בפרודקשן. בין הפרויקטים האחרונים: אגרגטור הצעות מחיר לביטוח המשולב עם 12 חברות ביטוח, ומערכת לחישוב וניטור עמלות המכסה מעל 20 חברות ביטוח, נתמכות במערך בדיקות תלת-שכבתי ב-MSTest לחוקים עסקיים, לחוזי HTTP ולהתנהגות SQL אמיתית. בעל ניסיון במערכות אימות והרשאות, SQL Server, פיתוח Workers, ואינטגרציה עם שירותי Google Cloud, Microsoft 365 ו-AWS. לומד מהר, לוקח אחריות ומרגיש בבית בסביבת סטארטאפ.',
 
   title_skills: 'כישורים טכנולוגיים',
   skills: [
-    { group: 'Backend וארכיטקטורה', items: 'C# / .NET Core (.NET 6–8) · תכנון REST API · Entity Framework Core · SQL Server (SSMS) · אימות והרשאות (JWT, claims, אורך חיי טוקן, חסימת משתמש, איפוס סיסמה) · Workers ואוטומציות' },
-    { group: 'ענן ואינטגרציות', items: 'AWS S3 · Google Cloud Vision (OCR) · Gmail API · Microsoft Graph · Supabase / PostgreSQL · Vercel · בלמידה: AWS SQS, AWS Step Functions' },
+    { group: 'Backend וארכיטקטורה', items: 'C# / .NET Core (.NET 6–8) · תכנון ארכיטקטורת שירותים ונתונים · תכנון REST API · Entity Framework Core · SQL Server (SSMS) · אימות והרשאות (JWT, claims, אורך חיי טוקן, חסימת משתמש, איפוס סיסמה) · Workers ואוטומציות · בדיקות יחידה, HTTP ואינטגרציה מול SQL (MSTest)' },
+    { group: 'כלי AI ואינטגרציה', items: 'Claude Code · Codex · חיבור שרתי MCP · כתיבת Agent Skills ייעודיים · ניתוב מודלים ב-OpenRouter' },
     { group: 'Frontend (ידע עבודה)', items: 'Angular · React · TypeScript · HTML / CSS' },
-    { group: 'DevOps וכלים', items: 'פריסה ב-IIS · Git / GitHub (עבודת צוות) · Postman · Make · JSON / XML' },
+    { group: 'ענן ואינטגרציות', items: 'AWS S3 · Google Cloud Vision (OCR) · Gmail API · Microsoft Graph · Supabase / PostgreSQL · Vercel · בלמידה: AWS SQS, AWS Step Functions' },
+    { group: 'DevOps וכלים', items: 'Git / GitHub (בראנצ׳ים, סקירת Pull Requests, ניהול גרסאות) · GitHub Actions · Jenkins · פריסה ב-IIS · Postman · Make · JSON / XML' },
   ],
 
   title_soft: 'כישורים',
@@ -164,17 +170,21 @@ const heRaw = {
     {
       date: '06/2024 – היום',
       role: 'מפתח Backend ושותף',
-      org: 'סטארטאפ אינשורטק, ישראל',
+      org: 'Stagent, ישראל',
       bullets: [
         'אחריות על פיצ׳רים מקצה לקצה, מכתיבת האפיון ותכנון ה-API ועד להרצה בפרודקשן',
+        'תכנון ארכיטקטורת השירותים והנתונים של הפלטפורמה, מגבולות ה-API ומודלי הנתונים ועד לדפוסי האינטגרציה מול יותר מ-20 חברות ביטוח',
         'תכנון ופיתוח REST APIs באמצעות .NET Core',
         'בניית מודול האימות: הנפקת JWT, claims, אורך חיי טוקן, חסימה לאחר ניסיונות התחברות כושלים ותהליך איפוס סיסמה',
         'פיתוח Workers ואוטומציות המריצים תהליכים עסקיים',
         'עבודה עם SQL Server על שאילתות, יחסים בין טבלאות ואופטימיזציה',
         'חיבור APIs חיצוניים: ממשקי הצעות מחיר של חברות ביטוח, Gmail API ו-Microsoft Graph לאוטומציית מייל, ו-Google Cloud Vision OCR לאימות רישיונות סוכנים',
+        'בניית מערך בדיקות תלת-שכבתי ב-MSTest: בדיקות יחידה לחוקים העסקיים, בדיקות HTTP מבודדות לראוטינג, הרשאות, קודי סטטוס ומבנה ה-JSON ללא שרת חי, ובדיקות אינטגרציה מול בסיס נתונים SQL חד-פעמי. EF In-Memory לא מתקבל כהוכחה להתנהגות מול SQL',
+        'בניית תהליכי CI ב-GitHub Actions להרצת מערך הבדיקות בכל דחיפה לקוד',
         'פריסה ותחזוקה של שירותים ב-IIS, עם מעבר מתוכנן ל-AWS EC2',
+        'ניהול בראנצ׳ים, סקירת Pull Requests וזרימת גרסאות על פני הריפוזיטוריז של הצוות באמצעות Git ו-GitHub',
         'עבודה משותפת עם צוות ה-Frontend (Angular) והשתתפות בהחלטות תכנון המערכת',
-        'ניהול קוד מקור באמצעות Git / GitHub בסביבת עבודה Agile',
+        'שימוש יומיומי ב-Claude Code וב-Codex לכתיבת חוקים עסקיים, פיתוח וסקירת קוד ויצירת כיסוי בדיקות, וכתיבת Agent Skills ייעודיים לתהליכים חוזרים. חיבור שרתי MCP לסביבת הפיתוח',
       ],
     },
     {
@@ -243,7 +253,7 @@ const heRaw = {
         'שילוב מסווג AI שקורא הודעות WhatsApp נכנסות ומחליט אם כל הודעה היא ליד אמיתי',
         'אוטומציה ב-Make שמביאה לידים מטפסי לידים בפייסבוק אל תוך המערכת',
       ],
-      stack: 'React, Supabase / PostgreSQL, Vercel, Make',
+      stack: 'React, Supabase / PostgreSQL, Vercel, Make, OpenRouter',
     },
   ],
 
