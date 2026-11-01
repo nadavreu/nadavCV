@@ -57,14 +57,14 @@ function build(data, lang) {
     children: [run(text, { size: 20, color: INK })],
   });
 
-  // "Role — Org" with the date pushed to the far edge via a tab stop
+  // "Role, Org" with the date pushed to the far edge via a tab stop
   const roleLine = (date, role, org) => new Paragraph({
     alignment: align, bidirectional: rtl,
     spacing: { before: 120, after: 20 },
     tabStops: [{ type: rtl ? TabStopType.LEFT : TabStopType.RIGHT, position: TabStopPosition.MAX }],
     children: [
       run(role, { bold: true, size: 21, color: INK }),
-      run(org ? `  —  ${org}` : '', { size: 20, color: MUTED }),
+      run(org ? `, ${org}` : '', { size: 20, color: MUTED }),
       run('\t', {}),
       new TextRun({ text: date, font, size: 19, color: MUTED, bold: true }),
     ],
@@ -97,7 +97,7 @@ function build(data, lang) {
     kids.push(new Paragraph({
       alignment: align, bidirectional: rtl,
       spacing: { before: 120, after: 20 },
-      children: [run(p.name, { bold: true, size: 21, color: INK }), run(`  —  ${p.role}`, { size: 20, color: MUTED })],
+      children: [run(p.name, { bold: true, size: 21, color: INK }), run(` (${p.role})`, { size: 20, color: MUTED })],
     }));
     p.bullets.forEach(b => kids.push(bullet(b)));
     kids.push(new Paragraph({
@@ -118,7 +118,7 @@ function build(data, lang) {
 
   return new Document({
     creator: 'Nadav Reubens',
-    title: `${rtl ? contact.name_he : contact.name_en} — CV`,
+    title: `${rtl ? contact.name_he : contact.name_en} CV`,
     styles: { default: { document: { run: { font, size: 20 } } } },
     sections: [{
       properties: { page: { margin: { top: 720, bottom: 720, left: 720, right: 720 } } },

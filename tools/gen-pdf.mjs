@@ -24,7 +24,7 @@ function html(data, lang) {
   const entry = (date, role, org, extra) => `
     <div class="entry">
       <div class="entry-head">
-        <div class="entry-title"><strong>${esc(role)}</strong>${org ? `<span class="org"> — ${esc(org)}</span>` : ''}</div>
+        <div class="entry-title"><strong>${esc(role)}</strong>${org ? `<span class="org">, ${esc(org)}</span>` : ''}</div>
         <div class="date">${esc(date)}</div>
       </div>
       ${extra}
@@ -34,7 +34,7 @@ function html(data, lang) {
 <html lang="${rtl ? 'he' : 'en'}" dir="${rtl ? 'rtl' : 'ltr'}">
 <head>
 <meta charset="utf-8">
-<title>${esc(name)} — CV</title>
+<title>${esc(name)} CV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="${fontUrl}" rel="stylesheet">
@@ -101,7 +101,7 @@ function html(data, lang) {
   ${section(data.title_proj, data.proj.map(p => `
     <div class="entry">
       <div class="entry-head">
-        <div class="entry-title"><strong>${esc(p.name)}</strong><span class="org"> — ${esc(p.role)}</span></div>
+        <div class="entry-title"><strong>${esc(p.name)}</strong><span class="org"> (${esc(p.role)})</span></div>
       </div>
       ${ul(p.bullets)}
       <div class="stack"><strong>${esc(stackLabel)}:</strong> ${esc(p.stack)}</div>

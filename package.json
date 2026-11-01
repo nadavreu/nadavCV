@@ -1,4 +1,15 @@
 {
+  "name": "nadav-cv-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node serve.mjs",
+    "start": "node serve.mjs",
+    "cv:docx": "node tools/gen-docx.mjs",
+    "cv:pdf": "node tools/gen-pdf.mjs",
+    "cv": "node tools/gen-docx.mjs && node tools/gen-pdf.mjs"
+  },
   "dependencies": {
     "docx": "^9.10.0",
     "puppeteer": "^24.37.5"

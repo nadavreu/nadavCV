@@ -30,7 +30,7 @@ export const en = {
 
   title_skills: 'TECHNICAL SKILLS',
   skills: [
-    { group: 'Backend & Architecture', items: 'C# / .NET Core (.NET 6–8) · Service & data architecture · RESTful API design · Entity Framework Core · SQL Server (SSMS) · Authentication (JWT, claims, token lifetime, lockout, password reset) · Background workers & automations · Unit, HTTP and SQL integration testing (MSTest)' },
+    { group: 'Backend & Architecture', items: 'C# / .NET Core (.NET 6-8) · Service & data architecture · RESTful API design · Entity Framework Core · SQL Server (SSMS) · Authentication (JWT, claims, token lifetime, lockout, password reset) · Background workers & automations · Unit, HTTP and SQL integration testing (MSTest)' },
     { group: 'AI Tooling & Integration', items: 'Claude Code · Codex · MCP server integration · Authoring custom agent skills · OpenRouter model routing' },
     { group: 'Frontend (Working Knowledge)', items: 'Angular · React · TypeScript · HTML / CSS' },
     { group: 'Cloud & Integrations', items: 'AWS S3 · Google Cloud Vision (OCR) · Gmail API · Microsoft Graph · Supabase / PostgreSQL · Vercel · Currently learning: AWS SQS, AWS Step Functions' },
@@ -43,7 +43,7 @@ export const en = {
   title_exp: 'EXPERIENCE',
   exp: [
     {
-      date: '06/2024 – Present',
+      date: '06/2024 - Present',
       role: 'Backend Developer & Partner',
       org: 'Stagent, Israel',
       bullets: [
@@ -63,9 +63,9 @@ export const en = {
       ],
     },
     {
-      date: '08/2021 – 06/2024',
+      date: '08/2021 - 06/2024',
       role: 'Shift Manager',
-      org: 'Electra (02/2022–06/2024) · T&M, Haifa (08/2021–02/2022)',
+      org: 'Electra (02/2022-06/2024) · T&M, Haifa (08/2021-02/2022)',
       bullets: [
         'Managed on-site teams, security procedures, and coordination',
         'Enforced security policies to maintain a safe environment',
@@ -73,19 +73,19 @@ export const en = {
       ],
     },
     {
-      date: '08/2020 – 03/2021',
+      date: '08/2020 - 03/2021',
       role: 'Independent Business',
       org: 'Customizing Shoes, Qiryat Ata',
       bullets: ['Managed independent projects and customers', 'Delivered customized solutions'],
     },
     {
-      date: '04/2019 – 11/2019',
+      date: '04/2019 - 11/2019',
       role: 'Electrician Assistant',
       org: 'Elad-Barak, Haifa',
       bullets: ['Electrical installations and maintenance', 'Reading technical plans', 'Hands-on technical problem solving'],
     },
     {
-      date: '03/2015 – 03/2018',
+      date: '03/2015 - 03/2018',
       role: 'Gunsmith',
       org: 'Israel Defense Forces',
       intro: 'Started as a commander in the Air Force, continued duty in a fighter battalion as a Gunsmith while doing war training, serving as operator of a classified system and travel commander.',
@@ -96,7 +96,7 @@ export const en = {
       ],
     },
     {
-      date: '09/2014 – 02/2015',
+      date: '09/2014 - 02/2015',
       role: "Teacher's Assistant",
       org: 'Rogozin High School, Qiryat Ata',
       bullets: ['Helped children with learning difficulties', 'Helped teachers recognize learning issues through one-to-one support instruction'],
@@ -138,13 +138,13 @@ export const en = {
 
   title_edu: 'EDUCATION',
   edu: [
-    { date: '10/2021 – 05/2025', name: 'B.Sc. in Software Engineering (Graduated)', org: 'ORT Braude College of Engineering, Karmiel', bullets: ['Object-Oriented Programming', 'Algorithms & Data Structures', 'UML / OPM', 'C / Python / Assembly'] },
+    { date: '10/2021 - 05/2025', name: 'B.Sc. in Software Engineering (Graduated)', org: 'ORT Braude College of Engineering, Karmiel', bullets: ['Object-Oriented Programming', 'Algorithms & Data Structures', 'UML / OPM', 'C / Python / Assembly'] },
     { date: '03/2018', name: 'Android Development Course', org: 'John Bryce, Haifa', bullets: [] },
     { date: 'Graduated 2014', name: 'High School Diploma', org: 'Rogozin, Qiryat Ata', bullets: ['Computer Science & Physics'] },
   ],
 
   title_lang: 'LANGUAGES',
-  lang: ['Hebrew – Native', 'English – High level (technical & conversational)'],
+  lang: ['Hebrew - Native', 'English - High level (technical & conversational)'],
 };
 
 const heRaw = {
@@ -155,7 +155,7 @@ const heRaw = {
 
   title_skills: 'כישורים טכנולוגיים',
   skills: [
-    { group: 'Backend וארכיטקטורה', items: 'C# / .NET Core (.NET 6–8) · תכנון ארכיטקטורת שירותים ונתונים · תכנון REST API · Entity Framework Core · SQL Server (SSMS) · אימות והרשאות (JWT, claims, אורך חיי טוקן, חסימת משתמש, איפוס סיסמה) · Workers ואוטומציות · בדיקות יחידה, HTTP ואינטגרציה מול SQL (MSTest)' },
+    { group: 'Backend וארכיטקטורה', items: 'C# / .NET Core (.NET 6-8) · תכנון ארכיטקטורת שירותים ונתונים · תכנון REST API · Entity Framework Core · SQL Server (SSMS) · אימות והרשאות (JWT, claims, אורך חיי טוקן, חסימת משתמש, איפוס סיסמה) · Workers ואוטומציות · בדיקות יחידה, HTTP ואינטגרציה מול SQL (MSTest)' },
     { group: 'כלי AI ואינטגרציה', items: 'Claude Code · Codex · חיבור שרתי MCP · כתיבת Agent Skills ייעודיים · ניתוב מודלים ב-OpenRouter' },
     { group: 'Frontend (ידע עבודה)', items: 'Angular · React · TypeScript · HTML / CSS' },
     { group: 'ענן ואינטגרציות', items: 'AWS S3 · Google Cloud Vision (OCR) · Gmail API · Microsoft Graph · Supabase / PostgreSQL · Vercel · בלמידה: AWS SQS, AWS Step Functions' },
@@ -168,7 +168,7 @@ const heRaw = {
   title_exp: 'ניסיון תעסוקתי',
   exp: [
     {
-      date: '06/2024 – היום',
+      date: '06/2024 - היום',
       role: 'מפתח Backend ושותף',
       org: 'Stagent, ישראל',
       bullets: [
@@ -188,25 +188,25 @@ const heRaw = {
       ],
     },
     {
-      date: '08/2021 – 06/2024',
+      date: '08/2021 - 06/2024',
       role: 'אחראי משמרת, צוות אבטחה',
-      org: 'אלקטרה (02/2022–06/2024) · T&M, חיפה (08/2021–02/2022)',
+      org: 'אלקטרה (02/2022-06/2024) · T&M, חיפה (08/2021-02/2022)',
       bullets: ['ניהול צוות עובדים', 'אחריות על אבטחה ותפעול', 'עבודה בתנאי לחץ', 'רישיון נשק ואבטחה'],
     },
     {
-      date: '08/2020 – 03/2021',
+      date: '08/2020 - 03/2021',
       role: 'עסק עצמאי',
       org: 'התאמה אישית של נעליים, קריית אתא',
       bullets: ['שירות לקוחות', 'עבודה עצמאית וניהול תהליכים', 'מחקר וביצוע פתרונות מותאמים'],
     },
     {
-      date: '04/2019 – 11/2019',
+      date: '04/2019 - 11/2019',
       role: 'עוזר חשמלאי',
       org: 'אלעד-ברק, חיפה',
       bullets: ['התקנות חשמל', 'קריאת תוכניות', 'עבודה עם ציוד חשמלי'],
     },
     {
-      date: '03/2015 – 03/2018',
+      date: '03/2015 - 03/2018',
       role: 'טכנאי נשק',
       org: 'שירות צבאי',
       intro: 'התחלתי כמפקד בחיל האוויר, המשכתי בתפקידי בגדוד קרבי בתור טכנאי נשק תוך כדי אימוני מלחמה, בהיותי מפעיל של מערכת מסווגת ומפקד נסיעות.',
@@ -217,7 +217,7 @@ const heRaw = {
       ],
     },
     {
-      date: '09/2014 – 02/2015',
+      date: '09/2014 - 02/2015',
       role: 'מורה עזר',
       org: 'תיכון רוגוזין, קריית אתא',
       bullets: ['עזרה לילדים עם קשיי למידה', 'לימוד פרטני וקבוצתי', 'עזרה למורים להכיר בבעיות למידה'],
@@ -259,13 +259,13 @@ const heRaw = {
 
   title_edu: 'השכלה',
   edu: [
-    { date: '10/2021 – 05/2025', name: 'בוגר תואר ראשון בהנדסת תוכנה', org: 'המכללה האקדמית להנדסה אורט בראודה, כרמיאל', bullets: ['Object-Oriented Programming', 'Algorithms & Data Structures', 'UML / OPM', 'C / Python / Assembly'] },
+    { date: '10/2021 - 05/2025', name: 'בוגר תואר ראשון בהנדסת תוכנה', org: 'המכללה האקדמית להנדסה אורט בראודה, כרמיאל', bullets: ['Object-Oriented Programming', 'Algorithms & Data Structures', 'UML / OPM', 'C / Python / Assembly'] },
     { date: '03/2018', name: 'Android Development Course', org: "ג'ון ברייס, חיפה", bullets: [] },
     { date: 'סיום לימודים 2014', name: 'תעודת בגרות', org: 'רוגוזין, קריית אתא', bullets: ['התמחות במדעי המחשב (C#, Visual Basic, Assembly)', 'הרחבה בפיזיקה'] },
   ],
 
   title_lang: 'שפות',
-  lang: ['עברית – שפת אם', 'אנגלית ברמה גבוהה – טכנית, קריאה וכתיבה'],
+  lang: ['עברית - שפת אם', 'אנגלית ברמה גבוהה - טכנית, קריאה וכתיבה'],
 };
 
 export const he = fixBidi(heRaw);
